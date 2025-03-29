@@ -1,0 +1,6 @@
+.drawing-canvas {
+  flex: 1;
+  background: white;
+  border: 1px solid #ccc;
+  touch-action: none;
+} 

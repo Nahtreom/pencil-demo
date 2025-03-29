@@ -1,0 +1,157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.team {
+    font-size: 16px;
+    color: #999;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.chars-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.char-item {
+    width: 80px;
+    height: 80px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.char-item img {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.text-input-container {
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#generatePreviewButton {
+    background-color: #d32f2f;
+    color: white;
+}
+
+#generatePreviewButton:hover {
+    background-color: #b71c1c;
+}
+
+#backButton {
+    background-color: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+#backButton:hover {
+    background-color: #e0e0e0;
+}
+
+.result-container {
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.download-container {
+    text-align: center;
+}
+
+#downloadButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#downloadButton:hover {
+    background-color: #45a049;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.result-section {
+    animation: fadeIn 0.5s ease-in-out;
+} 

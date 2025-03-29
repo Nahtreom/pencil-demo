@@ -1,0 +1,43 @@
+.toolbar {
+  width: 80px;
+  background-color: #a95848;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #8b3e2f;
+}
+
+.tool-item {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-item:hover, .tool-item.selected {
+  background-color: #8b3e2f;
+}
+
+.tool-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.tool-name {
+  font-size: 12px;
+}
+
+.toolbar-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.footer-icon {
+  font-size: 20px;
+  cursor: pointer;
+} 

@@ -1,0 +1,24 @@
+.nav-header {
+  background-color: #8b3e2f;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-tabs {
+  display: flex;
+}
+
+.nav-tab {
+  color: white;
+  padding: 0 15px;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav-tab:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+} 

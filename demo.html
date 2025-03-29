@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>笔韵智枢—大数据驱动的智能一体化字体创作引擎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Liu+Jian+Mao+Cao&family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 2.2rem;
+            font-weight: 500;
+        }
+        
+        h2 {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+        
+        p {
+            text-align: justify;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .code-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .code-button:hover {
+            background-color: #555;
+        }
+        
+        .github-icon {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .content {
+            padding: 0 80px;
+        }
+        
+        .architecture-image {
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .architecture-image h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .full-width-image {
+            max-width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-results {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .test-results p {
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+        
+        .table-image {
+            margin: 30px auto;
+            max-width: 80%;
+        }
+        
+        .result-img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .examples-section {
+            margin-top: 60px;
+            text-align: center;
+            background-color: white;
+            padding: 30px 0;
+            border: none; /* 移除边框 */
+            box-shadow: none; /* 移除阴影 */
+        }
+        
+        /* 轮播容器 */
+        .slideshow-container {
+            max-width: 80%;
+            position: relative;
+            margin: auto;
+            background-color: white;
+            border: none;
+            box-shadow: none;
+        }
+        
+        /* 隐藏图片默认 */
+        .mySlides {
+            display: none;
+        }
+        
+        .mySlides img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 前进和后退按钮 */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(255,255,255,0.8);
+            z-index: 10; /* 确保按钮在图片上层 */
+        }
+        
+        /* 前进按钮位置 */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        
+        /* 后退按钮位置 */
+        .prev {
+            left: 0;
+        }
+        
+        /* 鼠标悬停时的背景色 */
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+        }
+        
+        /* 指示点容器 */
+        .dots-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* 指示点样式 */
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        
+        .active, .dot:hover {
+            background-color: #717171;
+        }
+        
+        /* 淡入淡出动画 */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+        
+        .promotion-proof {
+            margin-top: 60px;
+            text-align: center;
+            margin-bottom: 40px;
+            background-color: white;
+            padding: 30px 0;
+            border: none; /* 移除边框 */
+            box-shadow: none; /* 移除阴影 */
+        }
+        
+        .proof-images {
+            background-color: white;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .proof-image {
+            flex: 0 1 auto;
+            max-width: 45%;
+        }
+        
+        .proof-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .proof-image {
+                max-width: 90%;
+            }
+        }
+        
+        .github-footer {
+            margin-top: 60px;
+            padding: 30px 0;
+            background-color: #f6f8fa;
+            border-top: 1px solid #e1e4e8;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-container {
+            padding: 0 80px;
+            text-align: center;
+        }
+        
+        .github-icon-container {
+            margin-bottom: 20px;
+        }
+        
+        .footer-github-icon {
+            color: #24292e;
+        }
+        
+        .license-text {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            color: #24292e;
+        }
+        
+        .source-code-text {
+            font-size: 0.85rem;
+            color: #586069;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        
+        /* 为"在线体验"区域添加红褐色边框，保持突出显示 */
+        .interactive-demo {
+            margin-top: 60px;
+            margin-bottom: 60px; /* 增加底部间距，与下方区域明确分隔 */
+            text-align: center;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 3px solid #853c33; /* 红褐色边框 */
+            max-width: 1000px; /* 限制最大宽度 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .interactive-demo p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+        
+        .font-selection {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .selection-container, .input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .selection-container label, .input-container label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .selection-container select, .input-container input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            min-width: 200px;
+        }
+        
+        .font-preview-section {
+            margin-top: 30px;
+        }
+        
+        .font-preview-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .font-preview-container {
+            background-image: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            min-width: 60%;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .font-preview {
+            position: relative;
+            z-index: 1;
+            color: rgba(0, 0, 0, 0.85);
+            text-rendering: optimizeLegibility;
+            font-size: 3rem;
+            line-height: 1.5;
+            transition: all 0.3s ease;
+        }
+        
+        /* 使用@font-face加载网络手写字体 */
+        @font-face {
+            font-family: '思源手写体';
+            src: url('https://cdn.jsdelivr.net/gh/googlefonts/noto-cjk@main/Sans/OTF/Chinese-Simplified/NotoSansCJKsc-Regular.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: '站酷快乐体';
+            src: url('https://cdn.staticfile.org/lxgw-wenkai-webfont/1.6.0/style/LXGWWenKai-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        /* 更实用的手写风格字体定义 */
+        .kaiti-font {
+            font-family: '思源手写体', 'Ma Shan Zheng', cursive;
+            transform: rotate(-0.5deg);
+            letter-spacing: 2px;
+        }
+        
+        .xingkai-font {
+            font-family: '站酷快乐体', 'Zhi Mang Xing', cursive;
+            transform: rotate(-1deg);
+            letter-spacing: 1px;
+        }
+        
+        .heiti-font {
+            font-family: 'Long Cang', cursive;
+            transform: rotate(0.5deg);
+        }
+        
+        .lishu-font {
+            font-family: 'Liu Jian Mao Cao', cursive;
+            transform: rotate(-0.5deg);
+        }
+        
+        .shuti-font {
+            font-family: 'ZCOOL XiaoWei', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .fangsong-font {
+            font-family: "仿宋", "FangSong", serif;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .youyuan-font {
+            font-family: "幼圆", "YouYuan", sans-serif;
+            font-weight: normal;
+            transform: scale(1, 1.1);
+        }
+        
+        .preview-note {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 15px;
+        }
+        
+    
+        @media (max-width: 768px) {
+            .font-preview {
+                font-size: 2rem;
+            }
+            
+            .font-selection {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        .font-style-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .font-style-option {
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100px;
+            transition: all 0.3s ease;
+        }
+        
+        .font-style-option:hover {
+            border-color: #ccc;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+        }
+        
+        .font-style-option.active {
+            border-color: #333;
+            background-color: #f5f5f5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .font-style-option img {
+            display: none; /* 隐藏原来的图片 */
+        }
+        
+        .font-style-option span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .selection-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .font-style-images {
+                gap: 10px;
+            }
+            
+            .font-style-option {
+                width: 80px;
+                padding: 8px;
+            }
+            
+            .font-style-option img {
+                width: 65px;
+                height: 65px;
+            }
+        }
+        
+        .font-sample {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .font-style-option[data-font="kaiti"] .font-sample {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .font-style-option[data-font="heiti"] .font-sample {
+            transform: scale(0.95, 1);
+        }
+        
+        .font-style-option[data-font="lishu"] .font-sample {
+            transform: scale(1, 0.9);
+        }
+        
+        .font-style-option[data-font="shuti"] .font-sample {
+            text-shadow: 1px 1px 3px rgba(200,0,0,0.2);
+        }
+        
+        .font-style-option[data-font="fangsong"] .font-sample {
+            transform: scale(0.98, 1.05);
+        }
+        
+        .loading-preview {
+            font-size: 1.5rem !important; /* 更小的字体 */
+            color: #666 !important; /* 更柔和的颜色 */
+            font-family: "ZCOOL XiaoWei", serif !important; /* 使用更优雅的字体 */
+            text-align: center;
+            position: relative;
+            padding: 10px 0;
+            letter-spacing: 1px; /* 增加字母间距 */
+            transition: all 0.5s ease;
+            animation: pulse 2s infinite; /* 添加脉冲动画 */
+        }
+        
+        /* 脉冲动画效果 */
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        /* 为每个阶段添加不同的小图标 */
+        .loading-preview::before {
+            content: "⏳"; /* 沙漏图标 */
+            margin-right: 10px;
+            font-size: 1.2rem;
+            display: inline-block;
+            animation: rotate 2s linear infinite; /* 旋转动画 */
+        }
+        
+        /* 旋转动画 */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .submit-btn {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #555;
+        }
+        
+        .inactive-preview {
+            color: #999;
+            font-size: 1.8rem;
+        }
+        
+        /* 为字体样本添加手写痕迹效果 */
+        .font-style-option .font-sample {
+            position: relative;
+        }
+        
+        .font-style-option .font-sample::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrgoGxXqUjEUbtBJJvMZ3RNjM6A+dJg55UdXyDgMMPTwKBhmdKzm+FP4ZXjPJyKwzCCILsz4OhVHTdsk+wkjA30GBDvwMxma6QfOBoIUSCfQ1jzBz9qvk4MzhjRZhLgFED4oRjIUA0cAjM0x/AE4AAA1AAAkAgMwAQxCRfA0AIDYAMgATkgA0sxAQEsJQEAcAAgAIkgmUIgCwA6IEJDQkEJQrA8C0CwTQMhcgSClBGQyAQQeAFiRIC0QsQFyRIAMCRSSBCQgjARQnYFJIkRAEsWuACABCYrKRQCAZQcpTRwJARIkgXgYYMgBPTQEQhQhgBIkRxSCA0A+QIQRUCIRCgoTYcHbQKCMMEhMAy8gGQPQoRUIsSNIQIACB0AQA8IAoQhgRCBJxAOgYIXhQpUBwEgEIBQJbgDwWTSEoAA6CEBAQwEgyIAVgBYAMDQCwQDAEYvFgYNIoAAAAXRf4rh62J+z+FX1Xdv1P+X79/v++aOz9X33f1U/fvz7mj87v3Lm7SfKPafQfh29fftft9tefn5+/OLdxfhcvnPzkY/CbPnv3//vfDxp3jtGw8LvCG9H+g2Lvdqpc//M33/+i/+U2r79//hd89+7fj/e9//3fB+9n7d+oXvX85+o/a//97//51d/9///72T//ysPK79yvN79Ru/+vb/+u13e//v3n9Lv1p+9/CjP82f90d/+8v//18//mX9Sf/++S7n7hf+BfN//XX/73v//98v4l8Lf0Z/0HfP3Xv//g5z//x/cftF8///v+vf9sPv0Z/zb9LHH6u/6l+uf5b/9p+rv6/7//8S+p///sT/5L0d+bP6//hP1B+SfnX0X+7/nP38+ZPyR//P0f5F/t/079X/pH6l+/fl7/8/P39Q/b/2v7N/VX6M+qfPn07/ov59+cv+Z+vvjF/9v9J/9f6f54/Vf/7/pfvX+q/3X8D+rf/78o/uP+F/dPrH9G/83yx+Tf4v/1/zf3v8f+K/5r99/lP43/S/2399+k//L+p/ov29+Iv8//sv7r+8/NP4T/1P1r/qf/r+z/vX9H///zz8t/zj9e/eH1Z+tfvL9n/6r9+/Un7p/yf/v+AP4P9p/8n9T///9q+/f3X+e/tP9L/Z/zp/g/5P/i/8P4X/q/4f/L+SPs39v/p/5r+e/7v+5/3Pj//X/of8r/vf7n/r/7f+5/7/+7/3vw//E/0/+D/t/9//B/6P/V/yv+14C/6X/G/8X/V3+PP7v9Ffw1/3f8P/3f4f/i/+D/8H6v/5/9F+7/rP9L/o/w==');
+            opacity: 0.05;
+            mix-blend-mode: multiply;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* 选择标题样式 - 确保独立成行 */
+        .selection-title {
+            font-size: 1.2rem;
+            margin: 0 0 30px 0;
+            padding-bottom: 15px;
+            font-weight: 500;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+            display: block;
+        }
+        
+        /* 调整选择方法容器样式 */
+        .selection-methods {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            margin: 20px 0 40px 0;
+        }
+        
+        .selection-method {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            max-width: 180px;
+        }
+        
+        .method-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-align: center;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .upload-label, .handwriting-button, .font-style-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .upload-icon, .handwriting-icon, .style-icon {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        
+        /* 字体选择弹窗样式 */
+        .font-style-modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .font-style-modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .close-style-modal {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-style-modal:hover {
+            color: #333;
+        }
+        
+        .font-style-modal h3 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .modal-font-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .modal-font-option {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-font-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .modal-font-option.active {
+            border-color: #333;
+            background-color: #f0f0f0;
+        }
+        
+        .modal-font-sample {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .modal-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .select-font-btn {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        /* 添加选择成功反馈样式 */
+        .selection-feedback {
+            display: none;
+            color: #4CAF50; /* 绿色 */
+            font-size: 0.9rem;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        /* 选中状态的按钮变红 */
+        .selection-method.selected .method-title {
+            color: #e53935; /* 红色 */
+            font-weight: bold;
+        }
+        
+        .selection-method.selected .font-style-button,
+        .selection-method.selected .upload-label,
+        .selection-method.selected .handwriting-button {
+            border-color: #e53935; /* 红色边框 */
+            background-color: rgba(229, 57, 53, 0.05); /* 淡红色背景 */
+        }
+        
+        /* 确保确定选择按钮可点击状态明确 */
+        .select-font-btn {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .select-font-btn:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .select-font-btn:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        
+        /* 在线体验区域标题和刷新按钮样式 */
+        .interactive-demo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .interactive-demo-header h2 {
+            margin: 0;
+        }
+        
+        /* 刷新按钮样式 */
+        .reset-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .reset-button:hover {
+            background-color: #e0e0e0;
+            transform: rotate(180deg);
+        }
+        
+        .reset-button:active {
+            transform: scale(0.95) rotate(180deg);
+        }
+        
+        .reset-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* 修改手写板模态框样式 */
+        .handwriting-modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        /* 当模态框显示时使用的样式 */
+        .handwriting-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .handwriting-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 540px;
+            width: 90%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .handwriting-modal-content h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* 米字格和汉字阴影相关样式 */
+        .handwriting-area {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 简化手写板样式 */
+        #handwriting-canvas {
+            background-color: white;
+            border: 1px solid #ddd;
+            display: block;
+            margin: 0 auto;
+            touch-action: none;
+            width: 100%;
+            height: 280px;
+        }
+
+        .handwriting-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        .handwriting-controls button {
+            flex: 1;
+            padding: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #clear-canvas {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        #save-canvas {
+            background-color: #333;
+            color: white;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        /* 添加参考汉字样式 */
+        .reference-character-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        #reference-character {
+            font-size: 3rem;
+            color: #aaa;
+            margin-bottom: 5px;
+            font-family: "楷体", "KaiTi", serif;
+        }
+
+        .reference-hint {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* 修改手写板控制按钮样式以适应三个按钮 */
+        .handwriting-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        #change-character {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #change-character:hover {
+            background-color: #45a049;
+        }
+
+        /* 进度指示器样式 */
+        .writing-progress {
+            margin-bottom: 15px;
+        }
+        
+        .progress-text {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #333;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        /* 已完成汉字预览区样式 */
+        .completed-characters {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .completed-title {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .character-containers {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .character-box {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+        
+        .character-box.empty {
+            background-color: #f9f9f9;
+        }
+        
+        .character-box img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .character-box.current {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* 调整自然语言生成字体功能区域的样式以适应在线体验区域内部 */
+        .advanced-generation {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            border-top: 1px solid #e0e0e0;
+            border: 2px solid #853c33; /* 添加稍细一点的红褐色边框 */
+        }
+        
+        .advanced-generation-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .advanced-generation-title h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .advanced-note {
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .prompt-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .prompt-input-area {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        #font-prompt {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            resize: vertical;
+            font-family: inherit;
+            background-color: white;
+        }
+        
+        .reference-upload-area {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .reference-upload-title {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .reference-upload-label {
+            position: relative;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 120px; /* 增加高度以更好地显示图片 */
+            overflow: hidden; /* 防止图片溢出 */
+        }
+        
+        .reference-upload-label:hover {
+            border-color: #999;
+            background-color: #f9f9f9;
+        }
+        
+        .upload-icon, .upload-text {
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .upload-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .upload-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .reference-preview {
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .reference-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+        }
+        
+        .ai-generation-action {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .generate-ai-btn {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(74, 108, 247, 0.2);
+        }
+        
+        .generate-ai-btn:hover {
+            background-color: #3a5ce5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
+        }
+        
+        .btn-icon {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+        
+        .ai-preview-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .ai-preview-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        /* 加载状态样式 */
+        .ai-preview-loading {
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* 直接显示结果，不添加额外容器 */
+        .ai-preview-result {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            background: none;
+        }
+        
+        /* 结果图片的样式 */
+        .ai-preview-result img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+        
+        /* 描述文本样式 */
+        .preview-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin: 20px auto 0;
+            max-width: 700px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4a6cf7;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+            margin: 0 auto 15px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .loading-step {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .ai-preview-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ai-preview-info {
+            margin-top: 20px;
+        }
+        
+        .preview-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .download-font-btn, .modify-prompt-btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .download-font-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        
+        .download-font-btn:hover:not([disabled]) {
+            background-color: #3d9140;
+        }
+        
+        .download-font-btn[disabled] {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            color: #666;
+        }
+        
+        .modify-prompt-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        .modify-prompt-btn:hover {
+            background-color: #e5e5e5;
+        }
+        
+        /* 响应式样式 */
+        @media (max-width: 768px) {
+            .prompt-container {
+                flex-direction: column;
+            }
+            
+            .ai-preview-result {
+                font-size: 2rem;
+            }
+            
+            .preview-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* 添加上传成功状态的框框样式 */
+        .reference-upload-label.uploaded {
+            border-color: #e53935; /* 红色边框 */
+            background-color: rgba(229, 57, 53, 0.05); /* 淡红色背景 */
+        }
+        
+        .upload-icon.uploaded {
+            color: #e53935; /* 图标变红 */
+        }
+        
+        .upload-text.uploaded {
+            color: #e53935; /* 文字变红 */
+        }
+        
+        /* 添加视觉分隔符 */
+        .examples-section:before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+        }
+        
+        /* "效果示例"区域独立样式 */
+        .examples-section {
+            padding-top: 40px; /* 增加顶部内边距 */
+            margin-top: 70px; /* 增加与上方区域的间距 */
+            text-align: center;
+            background-color: white;
+        }
+        
+        /* "应用证明"区域独立样式 */
+        .promotion-proof {
+            margin-top: 70px; /* 增加与上方区域的间距 */
+            text-align: center;
+            margin-bottom: 40px;
+            background-color: white;
+            position: relative; /* 用于绝对定位分隔线 */
+        }
+        
+        /* 添加视觉分隔符 */
+        .promotion-proof:before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+        }
+        
+        /* 确保标题样式在各区域保持一致 */
+        .examples-section h2,
+        .promotion-proof h2 {
+            margin-top: 0; /* 避免顶部额外间距 */
+            padding-top: 20px; /* 内部标题上方的间距 */
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+        
+        /* 上传框有图片时的样式 */
+        .reference-upload-label.has-image {
+            padding: 0; /* 移除内边距以便图片占满整个区域 */
+            border-color: #853c33; /* 使用红褐色边框匹配页面风格 */
+        }
+        
+        /* 上传框内图片的样式 */
+        .upload-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 覆盖整个区域 */
+            border-radius: 6px; /* 圆角与容器一致 */
+        }
+        
+        /* 上传图标和文字的样式调整 */
+        .upload-icon, .upload-text {
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* 有图片时隐藏上传图标和文字 */
+        .reference-upload-label.has-image .upload-icon,
+        .reference-upload-label.has-image .upload-text {
+            display: none;
+        }
+        
+        /* 通用上传框样式 */
+        .reference-upload-label, .style-upload-label {
+            position: relative;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        /* 设置两个上传框的不同高度 */
+        .reference-upload-label {
+            height: 120px;
+        }
+        
+        .style-upload-label {
+            height: 100px;
+        }
+        
+        /* 上传框有图片时的样式 */
+        .reference-upload-label.has-image,
+        .style-upload-label.has-image {
+            padding: 0;
+            border-color: #853c33; /* 红褐色边框 */
+        }
+        
+        /* 上传框内图片的样式 */
+        .upload-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        /* 上传图标和文字在有图片时隐藏 */
+        .reference-upload-label.has-image .upload-icon,
+        .reference-upload-label.has-image .upload-text,
+        .style-upload-label.has-image .upload-icon,
+        .style-upload-label.has-image .upload-text {
+            display: none;
+        }
+        
+        /* 上传标题样式 */
+        .reference-upload-title, .style-upload-title {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        /* 上传图标和文字样式 */
+        .upload-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        
+        .upload-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* 调整输入区域布局 */
+        .prompt-input-area {
+            flex: 2;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        /* 文字输入框样式 */
+        #font-prompt {
+            width: 100%;
+            min-height: 80px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            resize: vertical;
+            font-family: inherit;
+            background-color: white;
+        }
+        
+        /* 文字风格图片上传区域样式 */
+        .style-image-upload {
+            width: 100%;
+        }
+        
+        /* 标题和刷新按钮的容器样式 */
+        .title-with-refresh {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        
+        /* 刷新按钮样式 */
+        .refresh-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            color: #666;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        
+        .refresh-button:hover {
+            background-color: #e0e0e0;
+            transform: rotate(90deg);
+        }
+        
+        .refresh-button:active {
+            transform: scale(0.95) rotate(90deg);
+        }
+        
+        .refresh-icon {
+            font-size: 1.1rem;
+        }
+        
+        /* 确保标题文字不会因为按钮而换行 */
+        .title-with-refresh h3 {
+            margin: 0;
+            text-align: center;
+        }
+        
+        /* 文字风格图片上传框样式 */
+        .style-upload-label {
+            position: relative;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        /* 上传框有图片时的样式 */
+        .style-upload-label.has-image {
+            padding: 0;
+            border-color: #853c33; /* 红褐色边框 */
+        }
+        
+        /* 上传框内图片的样式 */
+        .style-upload-label .upload-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        /* 有图片时隐藏上传图标和文字 */
+        .style-upload-label.has-image .upload-icon,
+        .style-upload-label.has-image .upload-text {
+            display: none;
+        }
+        
+        /* 继续按钮容器样式 */
+        .continue-button-container {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        /* 继续按钮样式 */
+        .continue-button {
+            padding: 10px 20px;
+            background-color: #853c33; /* 使用红褐色，与边框一致 */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(133, 60, 51, 0.3);
+        }
+        
+        .continue-button:hover {
+            background-color: #9e4a40;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(133, 60, 51, 0.4);
+        }
+        
+        .continue-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(133, 60, 51, 0.3);
+        }
+        
+        .continue-icon {
+            font-size: 1.2rem;
+        }
+        
+        /* 上传框内的图片默认样式 */
+        .upload-preview-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        /* 小尺寸预览图样式 */
+        .small-preview-img {
+            width: 80% !important; /* 使用 !important 确保覆盖其他样式 */
+            height: 80% !important;
+            object-fit: contain !important; /* 改为 contain 以确保图片完整显示 */
+            margin: 10% auto !important; /* 居中显示 */
+            border: 1px solid #eee; /* 添加细边框 */
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* 添加轻微阴影 */
+        }
+        
+        /* 确保上传框在有小图片时的样式 */
+        .reference-upload-label.has-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border-color: #853c33; /* 红褐色边框 */
+        }
+    </style>
+</head>
+<body>
+    <h1>笔韵智枢—大数据驱动的智能一体化字体创作引擎</h1>
+    
+    <div class="button-container">
+        <a href="https://github.com/username/FuzzLLM" class="code-button">
+            <svg class="github-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            Code
+        </a>
+    </div>
+    
+    <div class="content">
+        <h2>作品概述</h2>
+        
+        <p>本团队独创性地采取 AI 批量生成字体的思路，用户只需要提供 10 个参考字，便可通过 AI 模型自动生成带有参考字风格特征的目标字体。本团队提出基于大数据的模型优化方法，在该任务上做出了以下三大创新：</p>
+        
+        <p><strong>1. 一个核心生成模型：</strong>设计了专用于字体部件特征抽取的多头编码器，并使用匈牙利算法来匹配汉字组件。将源字体的结构特征和参考字的风格特征用于目标字体的生成。</p>
+        
+        <p><strong>2. 两大数据优化算法：</strong>设计了基于四角编码映射的参考字推荐优化算法和基于ResNet-18网络的源字体匹配优化算法，并且使用三大类型数据集进行模型构建。从数据角度同时优化了用于体验与生成效果。</p>
+        
+        <p><strong>3. 三大类型数据：</strong>构建了现代字体库+生僻字库+古书法字库三大类型的数据集，包含12大类500余种不同风格的字体。</p>
+        
+        <p>本作品将所提出算法落地，设计了简洁易用的软件界面，并适配专业外设以满足专业设计的需求。作品应用结果表明"笔韵智枢"工具具有功能专业、使用便捷、生成精准的特点。将原先长达数月的字体设计周期，缩短到十几分钟以内；相比起传统的批量生成方法，本工具的生成效果具有高达30%的提升。大大降低了字体制作的成本和门槛。</p>
+        
+        <div class="architecture-image">
+            <img src="流程图.png" alt="笔韵智枢系统架构图" class="full-width-image">
+        </div>
+        
+        <div class="test-results">
+            <h2>测试结果</h2>
+            
+            <p>我们测试了团队所提出的基于多头编码器的字体生成模型，与基于开源代码的批量生成方案和目前成熟的CycleGAN（以下简称GAN）和FUNIT这两种AI风格迁移模型。四种方法分别在楷体、圆体、黑体这三种风格的字体生成任务中进行了对比实验，结果如下图所示：</p>
+            
+            <div class="table-image">
+                <img src="table1.png" alt="不同模型字体生成效果对比" class="result-img">
+            </div>
+            
+            <p>为了证明使用本工具利用AI生成方法能很好地解决传统逐字设计方法所面临的流程繁琐成本高的痛点，我们从人力/时间成本消耗的角度进行了对比测试：</p>
+            
+            <div class="table-image">
+                <img src="table2.png" alt="人力/时间成本消耗对比" class="result-img">
+            </div>
+            
+            <p>我们还验证了本工具在不同的硬件环境下都有充分的可部署性：</p>
+            
+            <div class="table-image">
+                <img src="table3.png" alt="不同硬件环境部署性测试" class="result-img">
+            </div>
+        </div>
+
+        <div class="interactive-demo">
+            <div class="interactive-demo-header">
+                <h2>在线体验</h2>
+                <button id="reset-button" class="reset-button" title="重置所有选择和输入">
+                    <span class="reset-icon">↻</span>
+                </button>
+            </div>
+            <p>您可以选择参考字体，输入您想要查看的文字，体验AI生成的字体效果。</p>
+            
+            <div class="font-selection">
+                <div class="selection-title">选择您喜欢的输入方式</div>
+                
+                <div class="selection-methods">
+                    <!-- 1. 自主选择风格 -->
+                    <div class="selection-method font-style-method">
+                        <div class="method-title">自主选择风格</div>
+                        <div class="font-style-button" id="open-font-style">
+                            <div class="style-icon">🔤</div>
+                            <div>字体风格</div>
+                        </div>
+                        <div class="selection-feedback" id="style-feedback">已选择字体</div>
+                    </div>
+                    
+                    <!-- 2. 上传参考 -->
+                    <div class="selection-method upload-method">
+                        <div class="method-title">上传文字参考</div>
+                        <div class="upload-container">
+                            <label for="font-upload" class="upload-label">
+                                <div class="upload-icon">⬆️</div>
+                                <div>上传图片</div>
+                            </label>
+                            <input type="file" id="font-upload" accept="image/*" style="display:none">
+                            <div class="upload-preview-container"></div>
+                            <div class="selection-feedback" id="upload-feedback">已上传参考</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3. 手写输入 -->
+                    <div class="selection-method handwriting-method">
+                        <div class="method-title">手写文字输入</div>
+                        <div class="handwriting-button" id="open-handwriting">
+                            <div class="handwriting-icon">✏️</div>
+                            <div>手写板</div>
+                        </div>
+                        <div class="handwriting-preview-container"></div>
+                        <div class="selection-feedback" id="handwriting-feedback">已完成手写</div>
+                    </div>
+                </div>
+                
+                <form id="font-preview-form" class="input-container">
+                    <label for="custom-text">输入文字：</label>
+                    <input type="text" id="custom-text" placeholder="请输入您想要预览的文字" value="">
+                    <button type="submit" class="submit-btn">生成预览</button>
+                </form>
+            </div>
+            
+            <div class="font-preview-section">
+                <h3>效果预览</h3>
+                <div class="font-preview-container">
+                    <div class="font-preview" id="preview-text"></div>
+                </div>
+                <p class="preview-note"></p>
+                
+                <!-- 添加继续按钮，初始隐藏 -->
+                <div class="continue-button-container" id="continue-button-container" style="display: none;">
+                    <button id="continue-to-ai" class="continue-button">
+                        <span class="continue-icon">➡️</span>
+                        <span class="continue-text">继续到AI个性化定制</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 2. 确保新内容添加在这里，在interactive-demo闭合前 -->
+            <div class="advanced-generation">
+                <!-- 自然语言生成字体功能的内容 -->
+                <div class="advanced-generation-title">
+                    <div class="title-with-refresh">
+                        <h3>你可以直接用自然语言或者任意图片来描述你想要生成的字体风格</h3>
+                        <button id="refresh-ai-generator" class="refresh-button" title="清空所有输入和预览">
+                            <span class="refresh-icon">↻</span>
+                        </button>
+                    </div>
+                    <p class="advanced-note">通过详细描述你想要的字体样式，或者上传参考图片，让 AI 为你创造专属字体</p>
+                </div>
+                
+                <div class="prompt-container">
+                    <div class="prompt-input-area">
+                        <textarea id="font-prompt" placeholder="描述你想要的字体风格，例如：'我想要一种结合了宋体的优雅和手写体的个性，笔画粗细有变化，稍微倾斜的字体'"></textarea>
+                        
+                        <!-- 添加文字风格图片上传框 -->
+                        <div class="style-image-upload">
+                            <div class="style-upload-title">上传文字风格图片（可选）</div>
+                            <label for="style-image-upload" class="style-upload-label" id="style-upload-label-container">
+                                <div class="upload-icon">🖼️</div>
+                                <div class="upload-text">点击上传文字风格图片</div>
+                                <!-- 图片将在这里显示 -->
+                            </label>
+                            <input type="file" id="style-image-upload" accept="image/*" style="display:none">
+                        </div>
+                    </div>
+                    
+                    <div class="reference-upload-area">
+                        <div class="reference-upload-title">上传参考图片（可选）</div>
+                        <label for="reference-upload" class="reference-upload-label" id="upload-label-container">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">点击上传参考图片</div>
+                        </label>
+                        <input type="file" id="reference-upload" accept="image/*" style="display:none">
+                    </div>
+                </div>
+                
+                <div class="ai-generation-action">
+                    <button id="generate-ai-font" class="generate-ai-btn">
+                        <span class="btn-icon">🪄</span>
+                        <span class="btn-text">用 AI 生成字体</span>
+                    </button>
+                </div>
+                
+                <div class="ai-preview-section" style="display: none;">
+                    <h3>AI 生成结果</h3>
+                    <div class="ai-preview-loading" style="display: none;">
+                        <div class="loading-spinner"></div>
+                        <div class="loading-text">AI 正在创作你的专属字体...</div>
+                        <div class="loading-step">正在分析风格特征</div>
+                    </div>
+                    
+                    <!-- 直接显示生成结果，不使用额外容器 -->
+                    <div class="ai-preview-result" id="ai-preview-result"></div>
+                    
+                    <!-- 简化描述区域 -->
+                    <p class="preview-description" id="ai-font-description"></p>
+                </div> <!-- advanced-generation结束标签 -->
+            </div> <!-- interactive-demo结束标签 -->
+        </div>
+
+        <!-- 效果示例区域 -->
+        <div class="examples-section">
+            <h2>效果示例</h2>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="example1.png" alt="字体生成示例1">
+                </div>
+                
+                <div class="mySlides fade">
+                    <img src="example2.png" alt="字体生成示例2">
+                </div>
+                
+                <div class="mySlides fade">
+                    <img src="example3.png" alt="字体生成示例3">
+                </div>
+                
+                <div class="mySlides fade">
+                    <img src="example4.png" alt="字体生成示例4">
+                </div>
+                
+                <div class="mySlides fade">
+                    <img src="example5.png" alt="字体生成示例5">
+                </div>
+                
+                <div class="mySlides fade">
+                    <img src="example6.png" alt="字体生成示例6">
+                </div>
+
+                <div class="mySlides fade">
+                    <img src="example7.png" alt="字体生成示例6">
+                </div>
+                
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+                <span class="dot" onclick="currentSlide(7)"></span>
+            </div>
+        </div>
+
+        <!-- 应用证明区域 -->
+        <div class="promotion-proof">
+            <h2>应用证明</h2>
+            <div class="proof-images">
+                <div class="proof-image">
+                    <img src="prove1.png" alt="应用证明1" class="proof-img">
+                </div>
+                <div class="proof-image">
+                    <img src="prove2.png" alt="应用证明2" class="proof-img">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="github-footer">
+        <div class="footer-container">
+            <div class="github-icon-container">
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                    <svg class="footer-github-icon" viewBox="0 0 16 16" width="24" height="24" fill="currentColor" aria-hidden="true">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>
+                </a>
+            </div>
+            
+            <p class="source-code-text">本网站采用知识共享署名-相同方式共享 4.0 国际许可协议进行许可。这意味着您可以自由地使用本网站的源代码，我们只请求您在网页底部链接回本页面。请记得删除您不希望出现在您网站上的分析代码。</p>
+        </div>
+    </footer>
+
+    <!-- 手写输入模态框 -->
+    <div id="handwriting-modal" class="handwriting-modal">
+        <div class="handwriting-modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>手写输入（请依次手写6个汉字）</h3>
+            
+            <!-- 添加进度指示器 -->
+            <div class="writing-progress">
+                <div class="progress-text">第 <span id="current-character-index">1</span>/6 个汉字</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 16.67%"></div>
+                </div>
+            </div>
+            
+            <canvas id="handwriting-canvas" width="500" height="300"></canvas>
+            
+            <!-- 添加参考汉字显示区域 -->
+            <div class="reference-character-container">
+                <div id="reference-character">永</div>
+                <div class="reference-hint">参考汉字</div>
+            </div>
+            
+            <!-- 添加已完成汉字预览区 -->
+            <div class="completed-characters">
+                <div class="completed-title">已完成汉字:</div>
+                <div class="character-containers" id="completed-characters-container">
+                    <div class="character-box empty" data-index="0"></div>
+                    <div class="character-box empty" data-index="1"></div>
+                    <div class="character-box empty" data-index="2"></div>
+                    <div class="character-box empty" data-index="3"></div>
+                    <div class="character-box empty" data-index="4"></div>
+                    <div class="character-box empty" data-index="5"></div>
+                </div>
+            </div>
+            
+            <div class="handwriting-controls">
+                <button id="clear-canvas">清除</button>
+                <button id="next-character">下一个</button>
+                <button id="save-canvas" disabled>完成</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加字体选择弹窗 -->
+    <div id="font-style-modal" class="font-style-modal">
+        <div class="font-style-modal-content">
+            <span class="close-style-modal">&times;</span>
+            <h3>选择字体风格</h3>
+            <div class="modal-font-options">
+                <div class="modal-font-option active" data-font="kaiti">
+                    <div class="modal-font-sample kaiti-font">武汉</div>
+                    <div class="modal-font-name">楷体</div>
+                </div>
+                <div class="modal-font-option" data-font="xingkai">
+                    <div class="modal-font-sample xingkai-font">大学</div>
+                    <div class="modal-font-name">行楷</div>
+                </div>
+                <div class="modal-font-option" data-font="heiti">
+                    <div class="modal-font-sample heiti-font">笔韵</div>
+                    <div class="modal-font-name">手写体</div>
+                </div>
+                <div class="modal-font-option" data-font="lishu">
+                    <div class="modal-font-sample lishu-font">智枢</div>
+                    <div class="modal-font-name">钢笔体</div>
+                </div>
+                <div class="modal-font-option" data-font="shuti">
+                    <div class="modal-font-sample shuti-font">团队</div>
+                    <div class="modal-font-name">艺术体</div>
+                </div>
+            </div>
+            <div class="modal-controls">
+                <button class="select-font-btn">确认选择</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        
+        // 当页面加载完成后自动显示幻灯片
+        document.addEventListener('DOMContentLoaded', function() {
+            showSlides(slideIndex);
+            // 确保自动轮播正常运行
+            setInterval(function() {
+                plusSlides(1);
+            }, 3000); // 每3秒切换一次，可根据需要调整
+            
+            // 为字体风格选项添加点击事件
+            const fontStyleOptions = document.querySelectorAll('.font-style-option');
+            fontStyleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 移除所有active类
+                    fontStyleOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // 添加active类到点击的选项
+                    this.classList.add('active');
+                });
+            });
+
+            // 确保表单提交使用当前选择的字体
+            const fontPreviewForm = document.getElementById('font-preview-form');
+            
+            // 替换原有的表单提交事件处理
+            if (fontPreviewForm) {
+                // 移除可能存在的旧事件处理器
+                const newForm = fontPreviewForm.cloneNode(true);
+                fontPreviewForm.parentNode.replaceChild(newForm, fontPreviewForm);
+                
+                // 添加新的事件处理器
+                newForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log("表单提交，使用字体:", currentFontStyle); // 调试信息
+                    
+                    // 获取输入的文字
+                    const customText = document.getElementById('custom-text').value;
+                    if (!customText.trim()) {
+                        alert('请输入要预览的文字');
+                        return;
+                    }
+                    
+                    // 在这里直接使用全局变量currentFontStyle
+                    generateFontPreview(currentFontStyle, customText);
+                });
+            }
+            
+            // 确保字体选择弹窗功能正确工作
+            const modalFontOptions = document.querySelectorAll('.modal-font-option');
+            modalFontOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    console.log("选择字体:", this.getAttribute('data-font')); // 调试信息
+                    
+                    // 移除所有active类
+                    modalFontOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // 添加active类到点击的选项
+                    this.classList.add('active');
+                });
+            });
+            
+            // 确保选择按钮正确设置字体
+            const selectFontBtn = document.querySelector('.select-font-btn');
+            if (selectFontBtn) {
+                selectFontBtn.addEventListener('click', function() {
+                    const activeOption = document.querySelector('.modal-font-option.active');
+                    if (activeOption) {
+                        const fontStyle = activeOption.getAttribute('data-font');
+                        console.log("确认选择字体:", fontStyle); // 调试信息
+                        
+                        // 存储选择的字体到全局变量
+                        currentFontStyle = fontStyle;
+                        
+                        // 设置字体选择为选中状态
+                        setSelectedMethod('font-style');
+                        
+                        // 关闭模态框
+                        document.getElementById('font-style-modal').style.display = 'none';
+                    }
+                });
+            }
+
+            // 文件上传功能
+            const fontUpload = document.getElementById('font-upload');
+            fontUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // 设置当前字体为null，表示使用上传的图像
+                    currentFontStyle = null;
+                    
+                    // 设置上传为选中状态
+                    setSelectedMethod('upload');
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        // 存储上传的图片URL到全局变量
+                        window.uploadedImageURL = event.target.result;
+                        
+                        // 创建预览图像
+                        const uploadPreviewContainer = document.querySelector('.upload-preview-container');
+                        uploadPreviewContainer.innerHTML = ''; // 清空现有预览
+                        
+                        const preview = document.createElement('img');
+                        preview.src = event.target.result;
+                        preview.className = 'upload-preview';
+                        preview.style.maxWidth = '100px';
+                        preview.style.maxHeight = '100px';
+                        preview.style.marginTop = '10px';
+                        uploadPreviewContainer.appendChild(preview);
+                        
+                        // 显示上传成功反馈，而不是文件名
+                        const feedback = document.getElementById('upload-feedback');
+                        if(feedback) {
+                            feedback.style.display = 'block';
+                            feedback.textContent = '已上传参考图片';
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // 手写功能
+            const openHandwriting = document.getElementById('open-handwriting');
+            const handwritingModal = document.getElementById('handwriting-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const canvas = document.getElementById('handwriting-canvas');
+            const ctx = canvas.getContext('2d');
+            const clearCanvas = document.getElementById('clear-canvas');
+            const saveCanvas = document.getElementById('save-canvas');
+            
+            let isDrawing = false;
+            
+            // 添加手写多个汉字的功能变量
+            let handwrittenCharacters = [null, null, null, null, null, null]; // 存储6个手写汉字的图像数据
+            let currentCharIndex = 0; // 当前正在绘制的汉字索引
+
+            // 修改打开手写板的事件处理
+            openHandwriting.addEventListener('click', function() {
+                handwrittenCharacters = [null, null, null, null, null, null]; // 重置数组
+                currentCharIndex = 0; // 重置索引
+                
+                // 重置进度指示
+                updateProgressBar(currentCharIndex);
+                document.getElementById('current-character-index').textContent = currentCharIndex + 1;
+                
+                // 重置已完成汉字容器
+                const characterContainers = document.querySelectorAll('.character-box');
+                characterContainers.forEach((container, index) => {
+                    container.innerHTML = '';
+                    container.classList.add('empty');
+                    container.classList.remove('current');
+                    
+                    if (index === 0) {
+                        container.classList.add('current');
+                    }
+                });
+                
+                // 禁用"完成"按钮
+                document.getElementById('save-canvas').disabled = true;
+                
+                // 显示模态框
+                handwritingModal.classList.add('show');
+                
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 生成随机汉字
+                updateReferenceCharacter();
+            });
+            
+            // 添加"下一个"按钮的事件处理
+            const nextCharButton = document.getElementById('next-character');
+            if (nextCharButton) {
+                nextCharButton.addEventListener('click', function() {
+                    // 保存当前手写的汉字
+                    handwrittenCharacters[currentCharIndex] = canvas.toDataURL('image/png');
+                    
+                    // 更新已完成汉字预览
+                    updateCompletedCharacter(currentCharIndex);
+                    
+                    // 清空画布准备绘制下一个
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // 移动到下一个汉字
+                    currentCharIndex++;
+                    
+                    // 更新进度指示器
+                    document.getElementById('current-character-index').textContent = currentCharIndex + 1;
+                    updateProgressBar(currentCharIndex);
+                    
+                    // 更新当前焦点字符框
+                    updateCurrentCharacterBox();
+                    
+                    // 生成新的参考汉字
+                    updateReferenceCharacter();
+                    
+                    // 如果已经完成了6个汉字，启用"完成"按钮
+                    if (currentCharIndex === 5) {
+                        nextCharButton.disabled = true;
+                        document.getElementById('save-canvas').disabled = false;
+                    }
+                });
+            }
+            
+            // 修改保存按钮的事件处理
+            saveCanvas.addEventListener('click', function(event) {
+                // 保存最后一个手写的汉字
+                handwrittenCharacters[currentCharIndex] = canvas.toDataURL('image/png');
+                
+                // 更新最后一个汉字的预览
+                updateCompletedCharacter(currentCharIndex);
+                
+                // 设置当前字体为null，表示使用图像模式
+                currentFontStyle = null;
+                
+                // 设置手写为选中状态
+                setSelectedMethod('handwriting');
+                
+                // 保存所有手写图像数据以备使用
+                window.handwritingImageData = handwrittenCharacters;
+                
+                // 显示已保存的反馈
+                const feedback = document.getElementById('handwriting-feedback');
+                if(feedback) {
+                    feedback.style.display = 'block';
+                    feedback.textContent = '6个手写汉字已保存，点击"生成预览"查看';
+                }
+                
+                // 关闭模态框
+                handwritingModal.classList.remove('show');
+                console.log("已保存6个手写汉字，等待点击生成预览按钮");
+                
+                // 防止事件冒泡
+                event.stopPropagation();
+            });
+
+            // 更新已完成汉字预览的函数
+            function updateCompletedCharacter(index) {
+                const characterBox = document.querySelector(`.character-box[data-index="${index}"]`);
+                if (characterBox) {
+                    // 移除empty类
+                    characterBox.classList.remove('empty');
+                    
+                    // 创建图像元素
+                    const img = document.createElement('img');
+                    img.src = handwrittenCharacters[index];
+                    
+                    // 清空容器并添加图像
+                    characterBox.innerHTML = '';
+                    characterBox.appendChild(img);
+                }
+            }
+            
+            // 更新当前字符框高亮
+            function updateCurrentCharacterBox() {
+                const characterBoxes = document.querySelectorAll('.character-box');
+                characterBoxes.forEach((box, index) => {
+                    box.classList.remove('current');
+                    if (index === currentCharIndex) {
+                        box.classList.add('current');
+                    }
+                });
+            }
+            
+            // 更新进度条
+            function updateProgressBar(index) {
+                const progressFill = document.querySelector('.progress-fill');
+                if (progressFill) {
+                    const percentage = ((index + 1) / 6) * 100;
+                    progressFill.style.width = `${percentage}%`;
+                }
+            }
+
+            // 添加字体选择弹窗打开/关闭事件
+            const openFontStyle = document.getElementById('open-font-style');
+            const fontStyleModal = document.getElementById('font-style-modal');
+            const closeStyleModal = document.querySelector('.close-style-modal');
+            
+            // 打开字体选择弹窗
+            if(openFontStyle && fontStyleModal) {
+                openFontStyle.addEventListener('click', function() {
+                    console.log("打开字体选择弹窗");
+                    fontStyleModal.style.display = 'block';
+                });
+            }
+            
+            // 关闭字体选择弹窗
+            if(closeStyleModal && fontStyleModal) {
+                closeStyleModal.addEventListener('click', function() {
+                    fontStyleModal.style.display = 'none';
+                });
+            }
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(event) {
+                if (event.target == fontStyleModal) {
+                    fontStyleModal.style.display = 'none';
+                }
+            });
+
+            // 添加参考汉字功能
+            const commonCharacters = "的一是在不了有和人这中大为上个国我以要他时来用们生到作地于出就分对成会可主发年动同工也能下过子说产种面而方后多定行学法所民得经十三之进着等部度家电力里如水化高自二理起小";
+
+            // 生成随机汉字
+            function getRandomCharacter() {
+                const randomIndex = Math.floor(Math.random() * commonCharacters.length);
+                return commonCharacters.charAt(randomIndex);
+            }
+
+            // 更新随机汉字
+            function updateReferenceCharacter() {
+                const referenceChar = document.getElementById('reference-character');
+                if (referenceChar) {
+                    referenceChar.textContent = getRandomCharacter();
+                }
+            }
+
+            // 添加到document.addEventListener('DOMContentLoaded', function() {...})内部
+            // 在初始化画布事件监听器后添加以下绘图功能的完整实现
+
+            // 绘图相关事件
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            // 触摸设备支持
+            canvas.addEventListener('touchstart', startDrawingTouch);
+            canvas.addEventListener('touchmove', drawTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+
+            function startDrawing(e) {
+                isDrawing = true;
+                ctx.beginPath();
+                ctx.moveTo(e.offsetX, e.offsetY);
+            }
+
+            function startDrawingTouch(e) {
+                isDrawing = true;
+                e.preventDefault();
+                
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'black';
+                
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+            }
+
+            function drawTouch(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+                
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+                
+                ctx.lineWidth = 5;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'black';
+                
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+                ctx.beginPath();
+            }
+        });
+        
+        // 前进/后退控制
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+        
+        // 当前幻灯片控制
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+        
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+
+        // 修改生成预览函数，支持多个手写汉字
+        function generateFontPreview(fontStyle, customText) {
+            console.log("生成预览，字体:", fontStyle, "文本:", customText); // 调试信息
+            
+            const previewText = document.getElementById('preview-text');
+            const continueButtonContainer = document.getElementById('continue-button-container');
+            
+            // 显示初始加载状态
+            previewText.textContent = "正在初始化生成环境...";
+            previewText.className = "font-preview loading-preview";
+            previewText.style.backgroundImage = 'none';
+            previewText.style.color = 'inherit';
+            
+            // 隐藏继续按钮
+            if (continueButtonContainer) {
+                continueButtonContainer.style.display = 'none';
+            }
+            
+            // 定义生成阶段消息
+            const loadingMessages = [
+                "正在分析文本内容...",
+                "正在计算字形特征...",
+                "正在调整文字风格...",
+                "正在细化笔画细节...",
+                "正在生成最终结果..."
+            ];
+            
+            // 总缓冲时间增加到6秒
+            const totalBufferTime = 6000;
+            const messageInterval = totalBufferTime / loadingMessages.length;
+            
+            // 依次显示不同阶段的加载消息
+            loadingMessages.forEach((message, index) => {
+                setTimeout(() => {
+                    previewText.textContent = message;
+                }, messageInterval * index);
+            });
+            
+            // 缓冲结束后显示结果
+            setTimeout(function() {
+                previewText.classList.remove('loading-preview');
+                
+                if (fontStyle) {
+                    // 字体风格模式 - 直接显示完整文本
+                    previewText.textContent = customText;
+                    previewText.classList.add(`${fontStyle}-font`);
+                } else if (window.uploadedImageURL) {
+                    // 图片上传模式 - 显示固定图片
+                    showImageInPreview("我爱武汉大学.jpg");
+                    
+                    // 显示继续按钮
+                    if (continueButtonContainer) {
+                        continueButtonContainer.style.display = 'block';
+                    }
+                } else if (window.handwritingImageData) {
+                    // 手写汉字模式 - 显示固定的图片
+                    showImageInPreview("pic3.jpg");
+                }
+            }, totalBufferTime);
+            
+            // 辅助函数：在预览区域显示图片，确保所有图片尺寸一致
+            function showImageInPreview(imageSrc) {
+                // 清空预览文本
+                previewText.textContent = "";
+                previewText.style.color = 'transparent';
+                
+                // 获取预览容器
+                const previewContainer = document.querySelector('.font-preview-container');
+                if (previewContainer) {
+                    // 创建图片元素
+                    const imgElement = document.createElement('img');
+                    imgElement.src = imageSrc;
+                    
+                    // 设置固定尺寸，确保所有图片大小一致
+                    imgElement.style.width = "300px"; // 固定宽度
+                    imgElement.style.height = "150px"; // 固定高度
+                    imgElement.style.objectFit = "contain"; // 保持纵横比
+                    imgElement.style.margin = "10px auto";
+                    imgElement.style.display = "block";
+                    
+                    // 清空容器并添加图片
+                    previewContainer.innerHTML = "";
+                    previewContainer.appendChild(imgElement);
+                    
+                    console.log("预览生成完成，显示图片:", imageSrc);
+                }
+            }
+        }
+
+        // 添加选择方法的状态管理
+        function setSelectedMethod(methodName) {
+            // 移除所有方法的选中状态
+            document.querySelectorAll('.selection-method').forEach(method => {
+                method.classList.remove('selected');
+            });
+            
+            // 隐藏所有反馈信息
+            document.querySelectorAll('.selection-feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+            
+            // 设置选中的方法
+            const selectedMethod = document.querySelector(`.${methodName}-method`);
+            if (selectedMethod) {
+                selectedMethod.classList.add('selected');
+                
+                // 显示相应的反馈信息
+                const feedback = document.getElementById(`${methodName}-feedback`);
+                if (feedback) {
+                    feedback.style.display = 'block';
+                }
+            }
+        }
+
+        // 1. 修改全局变量跟踪当前选择的字体风格
+        let currentFontStyle = "kaiti"; // 默认使用楷体
+
+        // 添加刷新按钮功能
+        const resetButton = document.getElementById('reset-button');
+        if (resetButton) {
+            resetButton.addEventListener('click', function() {
+                // 重置所有状态
+                resetAllSelections();
+            });
+        }
+
+        // 重置所有选择和输入
+        function resetAllSelections() {
+            // 1. 重置输入框
+            const customText = document.getElementById('custom-text');
+            if (customText) {
+                customText.value = '';
+            }
+            
+            // 2. 重置字体选择
+            currentFontStyle = "kaiti"; // 恢复默认字体
+            
+            // 3. 移除所有选择方法的选中状态
+            document.querySelectorAll('.selection-method').forEach(method => {
+                method.classList.remove('selected');
+            });
+            
+            // 4. 隐藏所有反馈信息
+            document.querySelectorAll('.selection-feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+            
+            // 5. 清空上传区域的预览
+            const uploadPreviewContainer = document.querySelector('.upload-preview-container');
+            if (uploadPreviewContainer) {
+                uploadPreviewContainer.innerHTML = '';
+            }
+            
+            // 6. 清空手写预览区域
+            const handwritingPreviewContainer = document.querySelector('.handwriting-preview-container');
+            if (handwritingPreviewContainer) {
+                handwritingPreviewContainer.innerHTML = '';
+            }
+            
+            // 7. 清空预览区域
+            const previewText = document.getElementById('preview-text');
+            if (previewText) {
+                previewText.textContent = '';
+                previewText.className = 'font-preview';
+                previewText.style.backgroundImage = 'none';
+                previewText.style.color = 'inherit';
+            }
+            
+            // 8. 重置预览容器
+            const previewContainer = document.querySelector('.font-preview-container');
+            if (previewContainer) {
+                previewContainer.innerHTML = '<div id="preview-text" class="font-preview"></div>';
+            }
+            
+            // 9. 重置上传图片URL
+            window.uploadedImageURL = null;
+            
+            console.log("已重置所有选择和输入");
+        }
+
+        // 在document.addEventListener('DOMContentLoaded', function() {...})内添加以下代码
+        // 自然语言生成字体功能
+        const referenceUpload = document.getElementById('reference-upload');
+        const referencePreview = document.getElementById('reference-preview');
+        const generateAiFont = document.getElementById('generate-ai-font');
+        const aiPreviewSection = document.querySelector('.ai-preview-section');
+        const aiPreviewLoading = document.querySelector('.ai-preview-loading');
+        const aiPreviewResult = document.getElementById('ai-preview-result');
+        const aiFontDescription = document.getElementById('ai-font-description');
+        const modifyPromptBtn = document.querySelector('.modify-prompt-btn');
+        const downloadFontBtn = document.querySelector('.download-font-btn');
+        
+        let referenceImageData = null;
+        
+        // 参考图片上传处理
+        if (referenceUpload) {
+            referenceUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        referenceImageData = event.target.result;
+                        
+                        // 获取上传标签容器
+                        const uploadLabel = document.getElementById('upload-label-container');
+                        
+                        // 标记为已有图片
+                        if (uploadLabel) {
+                            uploadLabel.classList.add('has-image');
+                            
+                            // 检查是否已存在预览图片
+                            let previewImg = uploadLabel.querySelector('.upload-preview-img');
+                            
+                            if (!previewImg) {
+                                // 创建新的图片元素
+                                previewImg = document.createElement('img');
+                                previewImg.className = 'upload-preview-img';
+                                uploadLabel.appendChild(previewImg);
+                            }
+                            
+                            // 设置图片源
+                            previewImg.src = referenceImageData;
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // 修改AI生成字体按钮点击事件处理函数
+        if (generateAiFont) {
+            generateAiFont.addEventListener('click', function() {
+                const promptText = document.getElementById('font-prompt').value.trim();
+                
+                // 检查是否上传了文字风格图片
+                const styleUploadLabel = document.getElementById('style-upload-label-container');
+                const hasStyleImage = styleUploadLabel && styleUploadLabel.classList.contains('has-image');
+                
+                // 检查是否上传了参考图片
+                const referenceUploadLabel = document.getElementById('upload-label-container');
+                const hasReferenceImage = referenceUploadLabel && referenceUploadLabel.classList.contains('has-image');
+                
+                // 如果既没有文字输入，又没有上传任何图片，则提示用户
+                if (!promptText && !hasStyleImage && !hasReferenceImage) {
+                    alert('请输入字体风格描述或上传图片');
+                    return;
+                }
+                
+                // 显示AI预览区域和加载中状态
+                aiPreviewSection.style.display = 'block';
+                aiPreviewLoading.style.display = 'block';
+                
+                // 清空预览结果
+                aiPreviewResult.innerHTML = '';
+                aiFontDescription.textContent = '';
+                
+                // 模拟AI加载的各个阶段
+                const loadingSteps = [
+                    '正在分析风格特征',
+                    '提取关键设计元素',
+                    '优化笔画结构',
+                    '调整整体平衡',
+                    '生成最终字体'
+                ];
+                
+                const loadingStepElement = document.querySelector('.loading-step');
+                
+                // 依次显示加载步骤
+                loadingSteps.forEach((step, index) => {
+                    setTimeout(() => {
+                        if (loadingStepElement) {
+                            loadingStepElement.textContent = step;
+                        }
+                    }, index * 1000);
+                });
+                
+                // 模拟AI处理完成
+                setTimeout(() => {
+                    // 隐藏加载中状态
+                    aiPreviewLoading.style.display = 'none';
+                    
+                    let imageFile;
+                    let description;
+                    
+                    // 优先级逻辑：
+                    // 1. 如果上传了文字风格图片，显示固定的"我爱武汉大学皮卡丘.png"
+                    // 2. 如果没有上传文字风格图片但有文本输入，根据文本描述匹配图片
+                    if (hasStyleImage) {
+                        // 上传了文字风格图片，显示固定的图片
+                        imageFile = "我爱武汉大学皮卡丘.png";
+                        description = `根据您上传的文字风格图片，AI生成了这款充满活力的字体风格。`;
+                    } else if (promptText) {
+                        // 没有上传文字风格图片但有文本输入，根据文本匹配图片
+                        imageFile = determineImageByPrompt(promptText);
+                        description = generateDescriptionForImage(promptText, imageFile);
+                    } else if (hasReferenceImage) {
+                        // 只上传了参考图片
+                        imageFile = "1.jpg"; // 默认显示第一张图片
+                        description = `根据您上传的参考图片，AI生成了这款字体效果。`;
+                    }
+                    
+                    // 显示对应图片
+                    showSpecificImage(imageFile);
+                    
+                    // 设置描述文本
+                    aiFontDescription.textContent = description;
+                    
+                }, 5000); // 5秒后显示结果
+            });
+        }
+        
+        // 保留原有的根据文本描述匹配图片的函数
+        function determineImageByPrompt(promptText) {
+            // 将提示文本转为小写以便于匹配
+            const lowerPrompt = promptText.toLowerCase();
+            
+            // 根据提示文本中的关键词匹配图片
+            if (lowerPrompt.includes('彩虹') || lowerPrompt.includes('毛发') || lowerPrompt.includes('粗体') || lowerPrompt.includes('柔软蓬松')) {
+                return "1.jpg";
+            } 
+            else if (lowerPrompt.includes('花朵') || lowerPrompt.includes('花瓣') && lowerPrompt.includes('手写') || lowerPrompt.includes('自然有机')) {
+                return "2.jpg";
+            }
+            else if (lowerPrompt.includes('金属') || lowerPrompt.includes('气球') || lowerPrompt.includes('反光') || lowerPrompt.includes('紫色') && lowerPrompt.includes('粉色')) {
+                return "3.jpg";
+            }
+            else if (lowerPrompt.includes('粉色花瓣') || lowerPrompt.includes('柔软细腻') || lowerPrompt.includes('散落') && lowerPrompt.includes('优雅')) {
+                return "4.jpg";
+            }
+            else if (lowerPrompt.includes('火龙果') || lowerPrompt.includes('活泼') || lowerPrompt.includes('种子') || lowerPrompt.includes('热带')) {
+                return "5.jpg";
+            }
+            else if (lowerPrompt.includes('姜饼') || lowerPrompt.includes('糖霜') || lowerPrompt.includes('棕色') || lowerPrompt.includes('节日点心')) {
+                return "6.jpg";
+            }
+            else {
+                // 默认情况，随机选择一张图片
+                const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"];
+                return images[Math.floor(Math.random() * images.length)];
+            }
+        }
+        
+        // 根据图片生成描述的函数
+        function generateDescriptionForImage(prompt, imageFile) {
+            const imageNumber = imageFile.replace(".jpg", "");
+            let description = "";
+            
+            switch(imageNumber) {
+                case "1":
+                    description = "彩虹色毛发般的粗体文字，流畅波动的质感，像毛发一样柔软蓬松";
+                    break;
+                case "2":
+                    description = "由鲜艳多彩的花朵组成的手写文字，花瓣散布在文字中，自然有机的设计";
+                    break;
+                case "3":
+                    description = "闪亮的金属气球般的方正文字，反光表面有光泽，充气般的外观，紫色和粉色渐变色";
+                    break;
+                case "4":
+                    description = "由粉色花瓣组成的文字，柔软细腻，散落的花瓣形成文字，优雅自然的设计";
+                    break;
+                case "5":
+                    description = "由火龙果形状的活泼文字组成，鲜艳的粉色和绿色，带有黑色种子，新鲜热带的外观";
+                    break;
+                case "6":
+                    description = "由姜饼做成的趣味文字，装饰着糖霜，温暖的棕色，精美的糖霜细节，像节日点心一样";
+                    break;
+                default:
+                    description = "创意独特的艺术字体，融合了多种元素，具有强烈的视觉冲击力";
+            }
+            
+            return `根据您的描述"${prompt}"，AI生成了这款${description}风格的字体。`;
+        }
+        
+        // 显示图片的函数
+        function showSpecificImage(imageSrc) {
+            // 获取预览结果区域
+            const previewResult = document.getElementById('ai-preview-result');
+            if (previewResult) {
+                // 清空现有内容
+                previewResult.innerHTML = '';
+                
+                // 创建图片元素
+                const imgElement = document.createElement('img');
+                imgElement.src = imageSrc;
+                
+                // 设置样式
+                imgElement.style.maxWidth = "100%";
+                imgElement.style.height = "auto";
+                imgElement.style.display = "block";
+                imgElement.style.margin = "0 auto";
+                imgElement.style.borderRadius = "8px";
+                
+                // 添加图片
+                previewResult.appendChild(imgElement);
+                
+                console.log("AI字体生成完成，显示图片:", imageSrc);
+            }
+        }
+        
+        // 添加上传框状态变化事件，上传图片后自动触发生成
+        function setupAutoGeneration() {
+            const styleUploadLabel = document.getElementById('style-upload-label-container');
+            const referenceUploadLabel = document.getElementById('upload-label-container');
+            const generateButton = document.getElementById('generate-ai-font');
+            
+            // 创建观察器
+            const observer = new MutationObserver(function(mutations) {
+                for (let mutation of mutations) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        // 如果两个上传框都有图片，自动触发生成
+                        if (styleUploadLabel.classList.contains('has-image') && 
+                            referenceUploadLabel.classList.contains('has-image')) {
+                            // 延迟一点时间再触发，让用户感知到上传完成
+                            setTimeout(() => {
+                                if (generateButton) {
+                                    generateButton.click();
+                                }
+                            }, 500);
+                        }
+                    }
+                }
+            });
+            
+            // 配置观察器
+            const config = { attributes: true };
+            
+            // 开始观察两个上传框
+            if (styleUploadLabel) {
+                observer.observe(styleUploadLabel, config);
+            }
+            if (referenceUploadLabel) {
+                observer.observe(referenceUploadLabel, config);
+            }
+        }
+        
+        // 在页面加载完成后设置自动生成功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... 其他初始化代码 ...
+            
+            // 设置自动生成
+            setupAutoGeneration();
+        });
+        
+        // 修改提示按钮点击事件
+        if (modifyPromptBtn) {
+            modifyPromptBtn.addEventListener('click', function() {
+                // 隐藏预览区域
+                aiPreviewSection.style.display = 'none';
+                
+                // 聚焦到prompt输入框
+                document.getElementById('font-prompt').focus();
+            });
+        }
+        
+        // 下载字体按钮点击事件
+        if (downloadFontBtn) {
+            downloadFontBtn.addEventListener('click', function() {
+                alert('字体文件准备就绪，开始下载...');
+                // 在实际应用中，这里会触发字体文件的下载
+            });
+        }
+        
+        // 刷新按钮功能
+        const refreshAiGenerator = document.getElementById('refresh-ai-generator');
+        if (refreshAiGenerator) {
+            refreshAiGenerator.addEventListener('click', function() {
+                // 清空文字输入
+                const fontPrompt = document.getElementById('font-prompt');
+                if (fontPrompt) {
+                    fontPrompt.value = '';
+                }
+                
+                // 重置文字风格图片上传框
+                resetUploadField('style-upload-label-container');
+                
+                // 重置参考图片上传框
+                resetUploadField('upload-label-container');
+                
+                // 隐藏预览区域
+                const aiPreviewSection = document.querySelector('.ai-preview-section');
+                if (aiPreviewSection) {
+                    aiPreviewSection.style.display = 'none';
+                }
+                
+                // 清空预览描述
+                const aiFontDescription = document.getElementById('ai-font-description');
+                if (aiFontDescription) {
+                    aiFontDescription.textContent = '';
+                }
+                
+                // 清空预览结果
+                const aiPreviewResult = document.getElementById('ai-preview-result');
+                if (aiPreviewResult) {
+                    aiPreviewResult.innerHTML = '';
+                }
+                
+                // 显示成功重置的提示（可选）
+                showResetNotification();
+            });
+        }
+        
+        // 重置上传字段
+        function resetUploadField(containerId) {
+            const uploadLabel = document.getElementById(containerId);
+            if (uploadLabel) {
+                // 移除图片和相关样式
+                uploadLabel.classList.remove('has-image');
+                
+                // 删除预览图片
+                const previewImg = uploadLabel.querySelector('.upload-preview-img');
+                if (previewImg) {
+                    previewImg.remove();
+                }
+                
+                // 重新显示上传图标和文字
+                const uploadIcon = uploadLabel.querySelector('.upload-icon');
+                const uploadText = uploadLabel.querySelector('.upload-text');
+                
+                if (uploadIcon) uploadIcon.style.display = 'block';
+                if (uploadText) uploadText.style.display = 'block';
+                
+                // 重置文件输入
+                if (containerId === 'style-upload-label-container') {
+                    document.getElementById('style-image-upload').value = '';
+                } else if (containerId === 'upload-label-container') {
+                    document.getElementById('reference-upload').value = '';
+                }
+            }
+        }
+        
+        // 显示重置成功提示（可选功能）
+        function showResetNotification() {
+            // 创建临时提示元素
+            const notification = document.createElement('div');
+            notification.className = 'reset-notification';
+            notification.textContent = '已重置所有输入';
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            notification.style.color = 'white';
+            notification.style.padding = '8px 16px';
+            notification.style.borderRadius = '4px';
+            notification.style.zIndex = '1000';
+            notification.style.fontSize = '0.9rem';
+            
+            // 添加到文档
+            document.body.appendChild(notification);
+            
+            // 2秒后移除
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 2000);
+        }
+        
+        // 确保在document.addEventListener('DOMContentLoaded', function() {...})内添加以下代码
+        
+        // 文字风格图片上传处理
+        const styleImageUpload = document.getElementById('style-image-upload');
+        if (styleImageUpload) {
+            styleImageUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageData = event.target.result;
+                        
+                        // 获取上传标签容器
+                        const styleUploadLabel = document.getElementById('style-upload-label-container');
+                        
+                        if (styleUploadLabel) {
+                            // 添加已有图片的样式类
+                            styleUploadLabel.classList.add('has-image');
+                            
+                            // 检查是否已存在预览图片
+                            let previewImg = styleUploadLabel.querySelector('.upload-preview-img');
+                            
+                            if (!previewImg) {
+                                // 创建新的图片元素
+                                previewImg = document.createElement('img');
+                                previewImg.className = 'upload-preview-img';
+                                styleUploadLabel.appendChild(previewImg);
+                            }
+                            
+                            // 设置图片源
+                            previewImg.src = imageData;
+                            
+                            console.log('文字风格图片已上传并显示在框内');
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        
+        // 确保刷新按钮能正确清除上传的图片
+        function resetUploadField(containerId) {
+            const uploadLabel = document.getElementById(containerId);
+            if (uploadLabel) {
+                // 移除图片和相关样式
+                uploadLabel.classList.remove('has-image');
+                
+                // 删除预览图片
+                const previewImg = uploadLabel.querySelector('.upload-preview-img');
+                if (previewImg) {
+                    previewImg.remove();
+                }
+                
+                // 重新显示上传图标和文字
+                const uploadIcon = uploadLabel.querySelector('.upload-icon');
+                const uploadText = uploadLabel.querySelector('.upload-text');
+                
+                if (uploadIcon) uploadIcon.style.display = 'block';
+                if (uploadText) uploadText.style.display = 'block';
+                
+                // 重置文件输入
+                if (containerId === 'style-upload-label-container') {
+                    document.getElementById('style-image-upload').value = '';
+                } else if (containerId === 'upload-label-container') {
+                    document.getElementById('reference-upload').value = '';
+                }
+            }
+        }
+        
+        // 添加继续按钮点击事件处理
+        const continueToAiButton = document.getElementById('continue-to-ai');
+        if (continueToAiButton) {
+            continueToAiButton.addEventListener('click', function() {
+                // 找到下方"上传参考图片（可选）"的上传框
+                const referenceUploadLabel = document.getElementById('upload-label-container');
+                
+                if (referenceUploadLabel) {
+                    // 添加图片到上传框
+                    referenceUploadLabel.classList.add('has-image');
+                    
+                    // 检查是否已存在预览图片
+                    let previewImg = referenceUploadLabel.querySelector('.upload-preview-img');
+                    
+                    if (!previewImg) {
+                        // 创建新的图片元素
+                        previewImg = document.createElement('img');
+                        previewImg.className = 'upload-preview-img small-preview-img'; // 添加小尺寸类
+                        referenceUploadLabel.appendChild(previewImg);
+                    } else {
+                        // 如果已存在图片，添加小尺寸类
+                        previewImg.classList.add('small-preview-img');
+                    }
+                    
+                    // 设置图片源为"我爱武汉大学.jpg"
+                    previewImg.src = "我爱武汉大学.jpg";
+                    
+                    // 隐藏上传图标和文字
+                    const uploadIcon = referenceUploadLabel.querySelector('.upload-icon');
+                    const uploadText = referenceUploadLabel.querySelector('.upload-text');
+                    
+                    if (uploadIcon) uploadIcon.style.display = 'none';
+                    if (uploadText) uploadText.style.display = 'none';
+                    
+                    // 滚动到"你可以直接用自然语言或者任意图片来描述你想要生成的字体风格"部分
+                    const advancedGenerationTitle = document.querySelector('.advanced-generation-title');
+                    if (advancedGenerationTitle) {
+                        // 平滑滚动到该元素
+                        advancedGenerationTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // 添加高亮效果
+                        advancedGenerationTitle.classList.add('highlight-section');
+                        setTimeout(() => {
+                            advancedGenerationTitle.classList.remove('highlight-section');
+                        }, 2000);
+                    }
+                    
+                    console.log("已自动上传'我爱武汉大学.jpg'到参考图片区域");
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,125 @@
+.character-display {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #8b3e2f;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.practice-grids-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.practice-grid {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid #e0a050;
+}
+
+.grid-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.diagonal-line-1, .diagonal-line-2, .vertical-line, .horizontal-line {
+  position: absolute;
+  background-color: transparent;
+  border: 1px dashed #e0a050;
+}
+
+.diagonal-line-1 {
+  width: 141%;
+  height: 0;
+  top: 50%;
+  left: -20%;
+  transform: rotate(45deg);
+}
+
+.diagonal-line-2 {
+  width: 141%;
+  height: 0;
+  top: 50%;
+  left: -20%;
+  transform: rotate(-45deg);
+}
+
+.vertical-line {
+  width: 0;
+  height: 100%;
+  left: 50%;
+  top: 0;
+}
+
+.horizontal-line {
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 50%;
+}
+
+.instruction-box {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border: 1px solid #8b3e2f;
+}
+
+.instruction-content {
+  display: flex;
+  align-items: center;
+}
+
+.instruction-grid {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0a050;
+  margin: 0 10px;
+}
+
+.change-button {
+  background-color: #8b3e2f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.character-avatar {
+  width: 50px;
+  height: 50px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><circle cx="25" cy="25" r="20" fill="%23f0f0f0"/></svg>');
+}
+
+.generate-button {
+  background-color: #8b3e2f;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+.generate-button:hover {
+  background-color: #a95848;
+} 
